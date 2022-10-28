@@ -15,9 +15,10 @@ Product.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    productName: {
+    product_name: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: '',
     },
     price: {
       type: DataTypes.DECIMAL(20, 2),
@@ -30,7 +31,7 @@ Product.init(
       defaultValue: 10,
       validate: { isNumeric: true },
     },
-    categoryId: {
+    category_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'category',
