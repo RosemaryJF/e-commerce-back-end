@@ -16,13 +16,19 @@ router.get('/', async (req, res) => {
   }
 });
 
-// get one tag
+// Get one tag
 // including associated products
 router.get('/:id', async (req, res) => {
   try {
     const singleTagData = await Tag.findByPk(req.params.id, {
       include: [{ model: Product }],
     });
+
+    if (!singleTagData) {
+      res.status(404).json({ message: 'No tag found with that id!' });
+      return;
+    }
+
     res.status(200).json(singleTagData);
   } catch (err) {
     res.status(500).json(err);
@@ -37,9 +43,24 @@ router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
-  Tag.destroy({ where: req.params.id})
+  try {
+    const singleTagData = await Category.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (!singleTagData) {
+      res.status(404).json({ message: 'No tag found with that id!' });
+      return;
+    }
+
+    res.status(200).json(singleTagData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
