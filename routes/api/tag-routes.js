@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
     const newTagData = await Tag.create({
       tag_name: req.body.tag_name
     });
-    res.status(200).json(newTagData);
+    res.status(200).json({ message: `${newTagData} has been created` });
   } catch (err) {
     res.status(400).json(err);
   }
@@ -56,7 +56,12 @@ router.put('/:id', async (req, res) => {
         id: req.params.id,
       } 
     })
-    .then((tag => Tag.findByPk(req.params.id)))
+
+    if (!tagUpdate) {
+      res.status(404).json({ message: 'No tag found with that id!' });
+      return;
+    }
+    
     res.status(200).json({ message: `${tagUpdate} has been updated` });
   } catch (err) {
     res.status(500).json(err);
