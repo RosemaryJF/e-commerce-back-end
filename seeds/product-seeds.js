@@ -1,5 +1,7 @@
+// import Product model from the models folder
 const { Product } = require('../models');
 
+// Data that will be seeded in the Product table
 const productData = [
   {
     product_name: 'Plain T-Shirt',

@@ -1,5 +1,7 @@
+// import Tag model from the models folder
 const { Tag } = require('../models');
 
+// Data that will be seeded in the Tag table
 const tagData = [
   {
     tag_name: 'rock music',

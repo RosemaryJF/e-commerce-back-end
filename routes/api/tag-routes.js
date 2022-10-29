@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
     const newTagData = await Tag.create({
       tag_name: req.body.tag_name
     });
-    res.status(200).json({ message: `${newTagData} has been created` });
+    res.status(200).json({ message: `${tag_name} has been created` });
   } catch (err) {
     res.status(400).json(err);
   }
@@ -62,7 +62,7 @@ router.put('/:id', async (req, res) => {
       return;
     }
     
-    res.status(200).json({ message: `${tagUpdate} has been updated` });
+    res.status(200).json({ message: `${tagUpdate} tag has been updated` });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -71,7 +71,7 @@ router.put('/:id', async (req, res) => {
 // Delete one tag by its `id` value
 router.delete('/:id', async (req, res) => {
   try {
-    const singleTagData = await Category.destroy({
+    const singleTagData = await Tag.destroy({
       where: {
         id: req.params.id,
       },
@@ -82,7 +82,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(singleTagData);
+    res.status(200).json({ message: `${singleTagData} tag has been deleted`});
   } catch (err) {
     res.status(500).json(err);
   }

@@ -1,5 +1,7 @@
+// import ProductTag model from the models folder
 const { ProductTag } = require('../models');
 
+// Data that will be seeded in the ProductTag table
 const productTagData = [
   {
     product_id: 1,

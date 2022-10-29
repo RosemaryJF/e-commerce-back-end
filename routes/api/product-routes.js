@@ -43,17 +43,19 @@ router.get('/:id', async (req, res) => {
 
 // Create a new product
 router.post('/', (req, res) => {
-  Product.create({
-    product_name: req.body.category_name,
-    price: req.body.price,
-    stock: req.body.stock,
-    category_id: req.body.category_id,
-    tag_id: req.body.tag_id
-  })
+    /* req.body should look like this...
+    {
+      product_name: "Basketball",
+      price: 200.00,
+      stock: 3,
+      tagIds: [1, 2, 3, 4]
+    }
+  */
+  Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-      if (req.body.tagIds.length) {
-        const productTagIdArr = req.body.tagIds.map((tag_id) => {
+      if (req.body.tag_id.length) {
+        const productTagIdArr = req.body.tag_id.map((tag_id) => {
           return {
             product_id: product.id,
             tag_id,
@@ -71,7 +73,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// update product
+// Update a product
 router.put('/:id', (req, res) => {
   // update product data
   Product.update(req.body, {
@@ -108,12 +110,12 @@ router.put('/:id', (req, res) => {
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-      // console.log(err);
+      console.log(err);
       res.status(400).json(err);
     });
 });
 
-// delete one product by its `id` value
+// Delete one product by its `id` value
 router.delete('/:id', async (req, res) => {
   try {
     const singleProductData = await Product.destroy({

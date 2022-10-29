@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
     const newCategoryData = await Category.create({
       category_name: req.body.category_name
     });
-    res.status(200).json({ message: `${newCategoryData} has been created` });
+    res.status(200).json({ message: `${req.body.category_name} has been created` });
   } catch (err) {
     res.status(400).json(err);
   }
@@ -65,11 +65,6 @@ router.put('/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-  //   .then((category => Category.findByPk(req.params.id)))
-  //   res.status(200).json({ message: `${categoryUpdate} has been updated` });
-  // } catch (err) {
-  //   res.status(500).json(err);
-  // }
 });
 
 // Delete a category by its `id` value
@@ -86,7 +81,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json({ message: `${singleCategoryData} was removed from the database` });
+    res.status(200).json({ message: `${singleCategoryData} category has been deleted` });
   } catch (err) {
     res.status(500).json(err);
   }
