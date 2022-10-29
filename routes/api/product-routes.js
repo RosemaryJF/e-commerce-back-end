@@ -41,13 +41,14 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// create new product
+// Create a new product
 router.post('/', async (req, res) => {
   try {
     const newProductData = await Product.create({
       product_name: req.body.category_name,
       price: req.body.price,
       stock: req.body.stock,
+      category_id: req.body.category_id,
       tag_id: req.body.tag_id
     });
     res.status(200).json(newProductData);

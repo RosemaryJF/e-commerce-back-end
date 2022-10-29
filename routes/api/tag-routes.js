@@ -35,11 +35,12 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
 // Create a new tag
 router.post('/', async (req, res) => {
   try {
     const newTagData = await Tag.create({
-      category_name: req.body.category_name
+      tag_name: req.body.tag_name
     });
     res.status(200).json(newTagData);
   } catch (err) {
@@ -47,11 +48,22 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
+// Update a tag by its `id` value
+router.put('/:id', async (req, res) => {
+  try {
+    const tagUpdate = await Tag.update(req.body, {
+      where: {
+        id: req.params.id,
+      } 
+    })
+    .then((tag => Tag.findByPk(req.params.id)))
+    res.status(200).json({ message: `${tagUpdate} has been updated` });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-  // delete one tag by its `id` value
+// Delete one tag by its `id` value
 router.delete('/:id', async (req, res) => {
   try {
     const singleTagData = await Category.destroy({
