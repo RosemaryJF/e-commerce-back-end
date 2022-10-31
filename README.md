@@ -56,7 +56,9 @@ From there the user will be able to launch the application from their intergrate
 
 ## Usage
 
-For a full tutorial please view my run through video of the application and its functionalities.
+For a full tutorial please view my run through video of the application and its functionalities via the link below:
+
+https://drive.google.com/file/d/1mOPdabdkOPIPeV3McHRLc18nuhjVhM8X/view
 
 Once the application is installed and being hosted on their local server the user should navigate to their API design program (such as; Insomnia or Postman).
 
